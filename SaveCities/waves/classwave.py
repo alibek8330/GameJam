@@ -1,6 +1,4 @@
-import pygame
-import random
-
+from libraries import *
 class Wave:
     def __init__(self, x, y, width, height, speed, color='blue'):
         self.x = x

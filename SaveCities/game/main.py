@@ -1,7 +1,4 @@
 from libraries import *
-from gui.colors import *
-from gui.gui import GUI
-from waves.classwave import *
 screen_width, screen_height = 1000, 700
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Save Cities")
