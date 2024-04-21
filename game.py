@@ -35,15 +35,11 @@ clock = pygame.time.Clock()
 
 
 flow1 = pygame.image.load(r"SaveCities\\img\\flow1.png")
-flow1 = pygame.transform.scale(flow1, (100, 100))
+flow1 = pygame.transform.scale(flow1, (200, 200))
 flow2 = pygame.image.load(r"SaveCities\\img\\flow2.png")
-flow2 = pygame.transform.scale(flow2, (100, 100))
+flow2 = pygame.transform.scale(flow2, (200, 200))
 flow3 = pygame.image.load(r"SaveCities\\img\\flow3.png")
-flow3 = pygame.transform.scale(flow3, (100, 100))
-# flow4 = pygame.image.load(r"SaveCities\\img\\flow4.png")
-# flow4 = pygame.transform.scale(flow4, (100, 100))
-# flow5 = pygame.image.load(r"SaveCities\\img\\flow5.png")
-# flow5 = pygame.transform.scale(flow5, (100, 100))
+flow3 = pygame.transform.scale(flow3, (200, 200))
 flow_frames = [flow1, flow2, flow3]
 flow_frame_index = 0
 # clock = pygame.time.Clock()
@@ -82,7 +78,7 @@ def main_menu():
                 if event.button == 1:
                     click = True
         frame_index = (frame_index + 1) % len(bg_frames)
-        clock.tick(5)
+        clock.tick(10)
         pygame.display.update()
 
 
@@ -178,10 +174,13 @@ class Flow(pygame.sprite.Sprite):
         super().__init__()
         self.image = flow_frames[flow_frame_index]
         self.rect = self.image.get_rect()
+        self.rect.center = (screen_width / 2, screen_height / 2)
     
     def move(self):
         flow_frame_index = (flow_frame_index + 1) % len(flow_frames)
         self.image = flow_frames[flow_frame_index]
+
+flow = Flow()
 
 
 class HpBarHome():
@@ -269,12 +268,14 @@ def game():
         )
         frame_index = (frame_index + 1) % len(bg_frames)
         if current_time - last_update_time > flow_animation_interval:
-            # Update the flow animation
-            screen.blit(flow_frames[flow_frame_index], (700, 350))
+        # Обновляем индекс кадра только когда пришло время
             flow_frame_index = (flow_frame_index + 1) % len(flow_frames)
-            # Reset the last update time
+        # Сбрасываем время последнего обновления
             last_update_time = current_time
-        clock.tick(5)
+
+    # Отображаем текущий кадр анимации каждый кадр обновления
+        screen.blit(flow_frames[flow_frame_index], (485, 250))
+        clock.tick(10)
         pygame.display.update()
         pygame.time.delay(10)
 
